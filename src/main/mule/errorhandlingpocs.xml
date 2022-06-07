@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:validation="http://www.mulesoft.org/schema/mule/validation"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ab3776db-55d2-46b0-809d-f7c747c0b67d" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<validation:config name="Validation_Config" doc:name="Validation Config" doc:id="15aa7189-3e41-4c27-9bad-7b380c56ecf0" />
+	<http:listener-config name="HTTP_Listener_config1" doc:name="HTTP Listener config" doc:id="2a2970b6-1fb7-49db-96fb-796f2080bee1" >
+		<http:listener-connection host="0.0.0.0" port="8082" />
+	</http:listener-config>
+	<file:config name="File_Config" doc:name="File Config" doc:id="c5e4a83b-0e96-4a0c-a165-b96787b23751" >
+		<file:connection workingDir="C:\Users\ASABALE\Desktop\akshay" />
+	</file:config>
+	<configuration doc:name="Configuration" doc:id="4c5f66e0-a84b-4abe-a6ba-0dc88f4da184" defaultErrorHandler-ref="globalerrorhandler" />
+	<flow name="errorhandlingpocsFlow" doc:id="82d5bb31-c2a6-4332-bac6-8b674ce44326" >
+		<http:listener doc:name="Listener" doc:id="90347281-392f-4179-a2ce-f0879c15f8f3" config-ref="HTTP_Listener_config" path="/test"/>
+		<set-payload value="akshay" doc:name="Set Payload" doc:id="d778595a-711a-4f44-969f-d084a75163fa" />
+		<validation:is-number numberType="INTEGER" doc:name="Is number" doc:id="0cd84168-de1e-4d67-8a74-b785fb114bfc" config-ref="Validation_Config" value="#[payload]"/>
+		<set-payload value="sabale" doc:name="Set Payload" doc:id="55055bbc-002d-4ef6-897c-3a7e6b36d7d6" />
+		<logger level="INFO" doc:name="Logger" doc:id="06e7e18c-1b8f-4467-8624-8426015c5f94" message="#[payload]"/>
+	</flow>
+	<error-handler name="globalerrorhandler" doc:id="4ef60758-f64b-4766-b7f8-8c7fa6b177fe" >
+		<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="6621515d-aad5-4490-8a83-217ad5c85d72" >
+			<ee:transform doc:name="Transform Message" doc:id="8a4fcc3f-df12-445a-8eb0-086ad215baeb" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{	message:"error handled by global error handler"
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-continue>
+	</error-handler>
+	<flow name="errorhandlingpocsFlow1" doc:id="2f3cd3a6-6787-46a9-9500-365c5e691f19" >
+		<http:listener doc:name="Listener" doc:id="1c8498c2-ae2f-422b-a882-f6f714f973e2" config-ref="HTTP_Listener_config" path="/test02"/>
+		<set-payload value="akshay" doc:name="Set Payload" doc:id="572ee3a7-62f6-4e50-8343-b513ffa38ce1" />
+		<validation:is-number numberType="INTEGER" doc:name="Is number" doc:id="dd0cbe18-9c2b-4b34-902b-11073c251bf6" config-ref="Validation_Config" value="#[payload]">
+			<error-mapping sourceType="VALIDATION:INVALID_NUMBER" targetType="APP:INVALIDNUMBER" />
+		</validation:is-number>
+		<set-payload value="sabale" doc:name="Set Payload" doc:id="f453a91a-adb2-47e3-9d02-d2c17f89f672" />
+		<error-handler>
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="1e7ac997-cf65-4049-b25c-87a7dfa73516" type="APP:INVALIDNUMBER">
+				<ee:transform doc:name="Transform Message" doc:id="1b4205c9-5a16-4971-bb31-7f49f267bc45" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/jSON
+---
+{message:"error at flow 2"
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</on-error-continue>
+		</error-handler>
+	</flow>
+</mule>
