@@ -2,17 +2,20 @@ pipeline
 {
 agent any
 stages{
-stage('Build Application'){
-steps{
-bat 'mvn -X clean install'
-}
-
-}
 
 stage('SonarQube Testing'){
 steps{
 bat 'mvn sonar:sonar -Dsonar.sources=src/ -Dsonar.host.url=http://localhost:9000 -Dsonar.login=802e819dd1c88aa5eb4814915c233e9998aa48e6'
 }
+}
+
+
+
+stage('Build Application'){
+steps{
+bat 'mvn -X clean install'
+}
+
 }
 
 stage('Deploy Application To Mulesoft '){
