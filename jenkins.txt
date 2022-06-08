@@ -5,6 +5,7 @@ stages{
 
 stage('SonarQube Testing'){
 steps{
+withSonarQubeEnv('SonarqubeServer') {
 bat 'mvn sonar:sonar -Dsonar.sources=src/ -Dsonar.host.url=http://localhost:9000 -Dsonar.login=802e819dd1c88aa5eb4814915c233e9998aa48e6'
 }
 }
