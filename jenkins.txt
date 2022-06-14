@@ -23,6 +23,12 @@ bat 'mvn -X clean install'
 }
 
 }
+stage('nexus deploy'){
+steps{
+nexusArtifactUploader credentialsId: 'nexus', groupId: 'com.capg', nexusUrl: 'localhost:8081/', nexusVersion: 'nexus2', protocol: 'http', repository: 'firstrepo', version: '1.0'
+}
+
+}
 
 stage('Deploy Application To Mulesoft '){
 
