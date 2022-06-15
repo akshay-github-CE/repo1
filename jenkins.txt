@@ -25,7 +25,7 @@ bat 'mvn -X clean install'
 }
  stage("Publish to Nexus Repository Manager") {
             steps {
-             nexusArtifactUploader artifacts: [[artifactId: 'errorhandlingpocs', classifier: '', file: 'target/errorhandlingpocs-1.0.0-mule-application.jar', type: 'jar']], credentialsId: 'nexus', groupId: 'com.mycompany', nexusUrl: 'localhost:8081/', nexusVersion: 'nexus2', protocol: 'http', repository: 'http://localhost:8081/repository/firstrepo/', version: '1.0.0'
+             nexusArtifactUploader artifacts: [[artifactId: 'errorhandlingpocs', classifier: '', file: 'target/errorhandlingpocs-1.0.0-mule-application.jar', type: 'jar']], credentialsId: 'nexus', groupId: 'com.mycompany', nexusUrl: 'localhost:8081/', nexusVersion: 'nexus2', protocol: 'http', repository: 'http://localhost:8081/repository/secondrepo/', version: '1.0.0'
             }
         }
 
