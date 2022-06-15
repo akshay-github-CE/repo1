@@ -35,12 +35,12 @@ bat 'mvn -X clean install'
                         echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
                         nexusArtifactUploader(
                             credentialsId: 'nexus', 
-							groupId: 'com.capg', 
-							nexusUrl: 'localhost:8081/', 
-							nexusVersion: 'nexus2', 
-							protocol: 'http', 
-							repository: 'firstrepo', 
-							version: '1.0'
+			    groupId: 'com.capg', 
+			    nexusUrl: 'localhost:8081/', 
+			    nexusVersion: 'nexus2', 
+			    protocol: 'http', 
+			    repository: 'firstrepo', 
+			    version: '1.0',
                             artifacts: [
                                 [artifactId: pom.artifactId,
                                 classifier: '',
