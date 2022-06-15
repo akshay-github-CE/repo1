@@ -25,37 +25,9 @@ bat 'mvn -X clean install'
 }
  stage("Publish to Nexus Repository Manager") {
             steps {
-                script {
-                    pom = readMavenPom file: "pom.xml";
-                    filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
-                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
-                    artifactPath = filesByGlob[0].path;
-                    artifactExists = fileExists artifactPath;
-                    if(artifactExists) {
-                        echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
-                        nexusArtifactUploader(
-                            credentialsId: 'nexus', 
-			    groupId: 'com.capg', 
-			    nexusUrl: 'localhost:8081/', 
-			    nexusVersion: 'nexus2', 
-			    protocol: 'http', 
-			    repository: 'firstrepo', 
-			    version: '1.0',
-                            artifacts: [
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: artifactPath,
-                                type: pom.packaging],
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: "pom.xml",
-                                type: "pom"]
-                            ]
-                        );
-                    } else {
-                        error "*** File: ${artifactPath}, could not be found";
-                    }
-                }
+                nexusArtifactUploader artifacts: 
+		[[artifactId: 'errorhandlingpocs', classifier: '', file: 'target/errorhandlingpocs-1.0.0-SNAPSHOT.jar', type: 'jar']], 
+		credentialsId: 'nexus', groupId: 'com.mycompany', nexusUrl: 'localhost:8081/', nexusVersion: 'nexus2', protocol: 'http', repository: 'http://localhost:8081/repository/firstrepo/', version: '1.0.0-SNAPSHOT'
             }
         }
 
