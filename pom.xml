@@ -39,7 +39,7 @@
 					 <connectedAppClientId>${connectedAppClientId}</connectedAppClientId>
                 <connectedAppClientSecret>${connectedAppClientSecret}</connectedAppClientSecret>
                 <connectedAppGrantType>client_credentials</connectedAppGrantType>
-				 		<businessGroup>capgemini\business_group_2\childbusinessgroup2</businessGroup>
+				 		<businessGroup>\business_group_2\childbusinessgroup2</businessGroup>
 						<applicationName>aksherrorhandlingdemo98</applicationName>
 						<environment>Sandbox</environment>
 						<workerType>MICRO</workerType>
