@@ -51,11 +51,7 @@ steps:
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
       sonar.projectKey=secondproject_secondproject_AYGqKhvErN3CsCTCE4yO
-- task: JavaToolInstaller@0
-  inputs:
-    versionSpec: '11'
-    jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'PreInstalled'
+
 - task: SonarQubeAnalyze@5
 - task: Maven@3
   inputs:
