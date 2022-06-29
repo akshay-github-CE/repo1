@@ -54,9 +54,10 @@ steps:
       sonar.projectKey=secondproject_secondproject_AYGqKhvErN3CsCTCE4yO
 
 - script: |
-    echo "##vso[task.setvariable variable=JAVA_HOME]$(JAVA_HOME_11_X64)"
-    echo "##vso[task.setvariable variable=PATH]$(JAVA_HOME_11_X64)\bin;$(PATH)"
-  displayName: "Set java version"
+    java -version
+  env:
+    JAVA_HOME: $(JAVA_HOME_11_X64)
+    PATH: $(JAVA_HOME_11_X64)/bin;$(PATH)
 - task: JavaToolInstaller@0
   inputs:
     versionSpec: '11'
