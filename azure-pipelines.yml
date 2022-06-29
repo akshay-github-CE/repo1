@@ -14,7 +14,8 @@ trigger:
     - jenkins.txt
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'Default'
+  vmImage: 'LIN24004004'
 variables:
 - group: build variable group
 - name: MAVEN_CACHE_FOLDER
