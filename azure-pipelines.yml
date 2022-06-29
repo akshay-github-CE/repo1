@@ -65,5 +65,5 @@ steps:
     javaHomeOption: 'JDKVersion'
     mavenVersionOption: 'Default'
     effectivePomSkip: true
-    sonarQubeRunAnalysis: false
+    sonarQubeRunAnalysis: true
     goals: 'clean install package deploy $(MAVEN_OPTS)  -DmuleDeploy -Dserver=$(server) -DconnectedAppClientId=$(connectedAppClientId) -DconnectedAppClientSecret=$(connectedAppClientSecret)'
