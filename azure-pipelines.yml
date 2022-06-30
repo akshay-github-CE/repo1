@@ -57,10 +57,10 @@ steps:
     
 - task: JavaToolInstaller@0
   inputs:
-    versionSpec: '8'
-    jdkArchitectureOption: 'x86'
+    versionSpec: '11'
+    jdkArchitectureOption: 'x64'
     jdkSourceOption: 'LocalDirectory'
-    jdkFile: 'C:\agent\openlogic-openjdk-8u332-b09-windows-x64.zip'
+    jdkFile: 'C:\agent\jdk-11.0.15.1_windows-x64_bin.zip'
     jdkDestinationDirectory: 'C:\destinationdirectoryforagent'
     cleanDestinationDirectory: true
 
