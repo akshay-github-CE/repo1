@@ -57,27 +57,26 @@ steps:
     
 - task: JavaToolInstaller@0
   inputs:
-    versionSpec: '11'
-    jdkArchitectureOption: 'x64'
+    versionSpec: '8'
+    jdkArchitectureOption: 'x86'
     jdkSourceOption: 'LocalDirectory'
     jdkFile: 'C:\agent\openlogic-openjdk-8u332-b09-windows-x64.zip'
     jdkDestinationDirectory: 'C:\destinationdirectoryforagent'
     cleanDestinationDirectory: true
 
-
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    mavenAuthenticateFeed: true
-    publishJUnitResults: false
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
     mavenVersionOption: 'Default'
-    effectivePomSkip: true
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
     sonarQubeRunAnalysis: true
+    sqMavenPluginVersionChoice: 'latest'
     goals: 'clean install package'
+
     
 - task: SonarQubePublish@5
   inputs:
