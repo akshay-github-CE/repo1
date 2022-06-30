@@ -60,8 +60,8 @@ steps:
     versionSpec: '11'
     jdkArchitectureOption: 'x64'
     jdkSourceOption: 'LocalDirectory'
-    jdkFile: 'C:\Program Files\Java\jdk-11.0.15.1'
-    jdkDestinationDirectory: 'C:\destinationdirectoryforagent'
+    jdkFile: 'jdk-11.0.15.1_windows-x64_bin.exe'
+    jdkDestinationDirectory: 'C:/destinationdirectoryforagent'
     cleanDestinationDirectory: true
 
 
