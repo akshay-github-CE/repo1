@@ -46,13 +46,7 @@ steps:
   inputs:
     SonarQube: 'serviceconnectionforsecondproject'
     scannerMode: 'Other'
-    extraProperties: |
-      # Additional properties that will be passed to the scanner,
-      # Put one key=value per line, example:
-      # sonar.exclusions=**/*.bin
-      sonar.projectKey=secondproject_secondproject_AYGzgDGWyfqbHuzdh9IS
-
-
+    
     
 - task: JavaToolInstaller@0
   inputs:
