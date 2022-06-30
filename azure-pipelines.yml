@@ -60,7 +60,7 @@ steps:
     versionSpec: '11'
     jdkArchitectureOption: 'x64'
     jdkSourceOption: 'LocalDirectory'
-    jdkFile: 'C:\agent\jdk-8u301-windows-x64.zip'
+    jdkFile: 'C:\agent\openlogic-openjdk-8u332-b09-windows-x64.zip'
     jdkDestinationDirectory: 'C:\destinationdirectoryforagent'
     cleanDestinationDirectory: true
 
