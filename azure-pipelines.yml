@@ -42,7 +42,6 @@ steps:
     script: |
       New-Item -Type Directory -Force "${HOME}/.m2"
       Copy-Item -Force "$(settingsxml.secureFilePath)" "${HOME}/.m2/settings.xml"
-      
 - task: SonarQubePrepare@5
   inputs:
     SonarQube: 'serviceconnectionforsecondproject'
@@ -51,7 +50,7 @@ steps:
       # Additional properties that will be passed to the scanner,
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      sonar.projectKey=secondproject_secondproject_AYGqKhvErN3CsCTCE4yO
+      sonar.projectKey=secondproject_secondproject_AYGzgDGWyfqbHuzdh9IS
 
 
     
@@ -63,19 +62,22 @@ steps:
     jdkFile: 'C:\agent\jdk-11.0.15.1_windows-x64_bin.zip'
     jdkDestinationDirectory: 'C:\destinationdirectoryforagent'
     cleanDestinationDirectory: true
-
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    codeCoverageToolOption: 'JaCoCo'
     javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
     mavenVersionOption: 'Default'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: true
     sqMavenPluginVersionChoice: 'latest'
     goals: 'clean install package'
+
+
 
     
 - task: SonarQubePublish@5
